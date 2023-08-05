@@ -107,16 +107,16 @@ class _RecipesTabState extends State<RecipesTab> {
                                     child: Container(
                                       height: 24,
                                       decoration: BoxDecoration(
-                                        color: getFoodColor(recipe.instance.foodType!).withOpacity(0.75),
+                                        color: getFoodColor(recipe.instance.foodType).withOpacity(0.75),
                                         borderRadius: BorderRadius.circular(4),
                                       ),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           const SizedBox(width: 16),
-                                          Text(getIcon(recipe.instance.foodType!), style: CBTS.fa.btn.s(16)),
+                                          Text(getIcon(recipe.instance.foodType), style: CBTS.fa.btn.s(16)),
                                           const SizedBox(width: 4),
-                                          Text(l.l.foodTypeToString(recipe.instance.foodType!), style: CBTS.regular.btn.s(16)),
+                                          Text(l.l.foodTypeToString(recipe.instance.foodType), style: CBTS.regular.btn.s(16)),
                                           const SizedBox(width: 16),
                                         ],
                                       ),
@@ -181,7 +181,7 @@ class _RecipesTabState extends State<RecipesTab> {
                                         height: 24,
                                         width: 24,
                                         decoration: BoxDecoration(
-                                          color: getFoodColor(recipe.instance.foodType!).withOpacity(0.75),
+                                          color: getFoodColor(recipe.instance.foodType).withOpacity(0.75),
                                           borderRadius: BorderRadius.circular(4),
                                         ),
                                         child: Icon(recipe.localInstance != null ? Icons.storage : Icons.cloud, color: CBColors.PrimaryButtonTextColor, size: 14),
@@ -205,7 +205,7 @@ class _RecipesTabState extends State<RecipesTab> {
     );
   }
 
-  String getIcon(FoodType foodType) {
+  String getIcon(FoodType? foodType) {
     switch (foodType) {
       case FoodType.mainDish:
         return FontAwesomeIcons.ConciergeBell;
@@ -219,7 +219,7 @@ class _RecipesTabState extends State<RecipesTab> {
   }
 }
 
-Color getFoodColor(FoodType foodType) {
+Color getFoodColor(FoodType? foodType) {
   switch (foodType) {
     case FoodType.mainDish:
       return CBColors.MainDishFoodTypeColor;

@@ -61,7 +61,7 @@ abstract class CBTexts extends ChangeNotifier {
 
 
 
-  String foodTypeToString(FoodType foodType) {
+  String foodTypeToString(FoodType? foodType) {
     switch (foodType) {
       case FoodType.unknown:
         return enum_foodTypeUnknown;
