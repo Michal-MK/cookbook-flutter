@@ -13,6 +13,7 @@ import 'package:cookbook/texts/generic/texts.dart';
 import 'package:cookbook/themes/colors.dart';
 import 'package:cookbook/viewmodel/ingredients_vm.dart';
 import 'package:cookbook/viewmodel/recipes_vm.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:one_of/one_of.dart';
@@ -55,6 +56,7 @@ class _CookbookHomePageState extends State<CookbookHomePage> with SingleTickerPr
       ),
       body: TabBarView(
         controller: tabController,
+        physics: const FastScrollPhysics(),
         children: [
           ChangeNotifierProvider.value(value: recipesTabVM, child: const RecipesTab()),
           ChangeNotifierProvider.value(value: ingredientsTabVM, child: const IngredientsTab()),
