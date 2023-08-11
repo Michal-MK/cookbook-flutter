@@ -7,6 +7,7 @@ abstract class RecipeTexts {
   String get recipeDetail_ingredientCount;
   String get recipeDetail_steps;
   String get recipeDetail_deleteLocalRecipe;
+  String get recipeDetail_deleteLocalRecipe_description;
   String get recipeDetail_recipeSaved;
   String get recipeDetail_shareText;
   String get recipeDetail_noIngredients;

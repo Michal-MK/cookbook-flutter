@@ -1,5 +1,6 @@
 import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
+import 'package:cookbook/const/style.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
 import 'package:cookbook/themes/colors.dart';
@@ -24,11 +25,11 @@ class IngredientListViewItem extends StatelessWidget {
       child: Material(
         elevation: 1,
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: RADIUS8,
         child: Container(
           decoration: BoxDecoration(
             color: CBColors.ListItemBackgroundColor,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: RADIUS8,
           ),
           child: InkWell(
             onTap: () async {
@@ -47,12 +48,12 @@ class IngredientListViewItem extends StatelessWidget {
                 await refreshable.refresh();
               }
             },
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: RADIUS8,
             child: Row(
               children: [
                 if (ingredient.imageUrl != null)
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: RADIUS8,
                     child: Image.network(ingredient.imageUrl!, width: 64, height: 64),
                   )
                 else
@@ -60,7 +61,7 @@ class IngredientListViewItem extends StatelessWidget {
                     width: 64,
                     height: 64,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: RADIUS8,
                       image: const DecorationImage(image: AssetImage("assets/img/ingredient_placeholder.jpg")),
                     ),
                   ),

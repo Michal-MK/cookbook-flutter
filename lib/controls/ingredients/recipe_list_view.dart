@@ -1,4 +1,5 @@
 import 'package:cookbook/const/nav_constants.dart';
+import 'package:cookbook/const/style.dart';
 import 'package:cookbook/converters/food_type_converters.dart';
 import 'package:cookbook/pages/nav/recipe_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
@@ -34,12 +35,12 @@ class RecipeListViewItem extends StatelessWidget {
             },
             child: Material(
               elevation: 1,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: RADIUS8,
               child: Container(
                 height: 200,
                 decoration: BoxDecoration(
                   color: CBColors.ListItemBackgroundColor,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: RADIUS8,
                   image: recipe.instance.imageUrl != null
                       ? DecorationImage(
                           image: NetworkImage(recipe.instance.imageUrl!),
@@ -61,7 +62,7 @@ class RecipeListViewItem extends StatelessWidget {
                           height: 24,
                           decoration: BoxDecoration(
                             color: recipe.instance.foodType!.getFoodColor().withOpacity(0.75),
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: RADIUS4,
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -94,7 +95,7 @@ class RecipeListViewItem extends StatelessWidget {
                                       width: 24,
                                       decoration: BoxDecoration(
                                         color: recipe.instance.foodType!.getFoodColor().withOpacity(0.75),
-                                        borderRadius: BorderRadius.circular(4),
+                                        borderRadius: RADIUS4,
                                       ),
                                       child: Icon(Icons.cloud, color: CBColors.PrimaryButtonTextColor, size: 14),
                                     ),
@@ -106,7 +107,7 @@ class RecipeListViewItem extends StatelessWidget {
                                       width: 24,
                                       decoration: BoxDecoration(
                                         color: recipe.instance.foodType!.getFoodColor().withOpacity(0.75),
-                                        borderRadius: BorderRadius.circular(4),
+                                        borderRadius: RADIUS4,
                                       ),
                                       child: Icon(Icons.storage, color: CBColors.PrimaryButtonTextColor, size: 14),
                                     ),
@@ -135,7 +136,7 @@ class RecipeListViewItem extends StatelessWidget {
                             width: 24,
                             decoration: BoxDecoration(
                               color: recipe.instance.foodType!.getFoodColor().withOpacity(0.75),
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: RADIUS4,
                             ),
                             child: Icon(recipe.localInstance != null ? Icons.storage : Icons.cloud, color: CBColors.PrimaryButtonTextColor, size: 14),
                           ),

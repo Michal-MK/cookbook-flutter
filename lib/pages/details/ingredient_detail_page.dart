@@ -1,5 +1,6 @@
 import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
+import 'package:cookbook/const/style.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
 import 'package:cookbook/texts/localization_provider.dart';
@@ -81,7 +82,7 @@ class _IngredientDetailPageState extends State<IngredientDetailPage> {
                     height: 200,
                     decoration: BoxDecoration(
                       color: CBColors.ListItemBackgroundColor,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: RADIUS8,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.2),
@@ -91,7 +92,7 @@ class _IngredientDetailPageState extends State<IngredientDetailPage> {
                       ],
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: RADIUS8,
                       child: (args.ingredient.oneOf.value as IngredientListModel).imageUrl != null
                           ? Image.network(
                               (args.ingredient.oneOf.value as IngredientListModel).imageUrl!,

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
+import 'package:cookbook/const/style.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
 import 'package:cookbook/texts/localization_provider.dart';
@@ -112,7 +113,7 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
                         height: 200,
                         decoration: BoxDecoration(
                           color: CBColors.ListItemBackgroundColor,
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: RADIUS8,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.2),

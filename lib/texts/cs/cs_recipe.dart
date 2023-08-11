@@ -19,6 +19,9 @@ class CsRecipeTexts implements RecipeTexts {
   String get recipeDetail_deleteLocalRecipe => "Opravdu chcete smazat recept?";
 
   @override
+  String get recipeDetail_deleteLocalRecipe_description => "Tímto smažete recept ze svého zařízení. Pokud nebyl mezitím smazán ze serveru, můžete ho stále získat zpět odtud.";
+
+  @override
   String get recipeDetail_recipeSaved => "Recept uložen";
 
   @override

@@ -1,5 +1,6 @@
 import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/const/preferences.dart';
+import 'package:cookbook/const/style.dart';
 import 'package:cookbook/styles/text_styles.dart';
 import 'package:cookbook/texts/localization_provider.dart';
 import 'package:cookbook/texts/generic/texts.dart';
@@ -67,7 +68,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
               trailing: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: RADIUS8,
                   color: CBColors.NavigationBarTextColor,
                   border: Border.all(color: Colors.black),
                 ),
@@ -102,10 +103,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     return Container(
                       decoration: BoxDecoration(
                         color: CBColors.ListItemBackgroundColor,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                        ),
+                        borderRadius: TRADIUS8,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -147,7 +145,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
               trailing: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: RADIUS8,
                   color: CBColors.NavigationBarTextColor,
                   border: Border.all(color: Colors.black),
                 ),

@@ -19,6 +19,9 @@ class EnRecipeTexts implements RecipeTexts {
   String get recipeDetail_deleteLocalRecipe => "Do you wish to delete the recipe?";
 
   @override
+  String get recipeDetail_deleteLocalRecipe_description => "This will delete the recipe from your device. You can still access it from the server if it has not been deleted in the mean time.";
+
+  @override
   String get recipeDetail_recipeSaved => "Recipe saved";
 
   @override

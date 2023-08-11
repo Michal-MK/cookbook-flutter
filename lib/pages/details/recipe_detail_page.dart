@@ -1,6 +1,8 @@
 import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/const/fa_icons.dart';
+import 'package:cookbook/const/style.dart';
+import 'package:cookbook/converters/food_type_converters.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
 import 'package:cookbook/pages/nav/recipe_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
@@ -50,21 +52,22 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text(l.l.recipe.recipeDetail_deleteLocalRecipe, style: CBTS.regular.primary.s(16)),
+                            title: Text(l.l.recipe.recipeDetail_deleteLocalRecipe, style: CBTS.bold.primary.s(18)),
+                            content: Text(l.l.recipe.recipeDetail_deleteLocalRecipe_description, style: CBTS.regular.primaryLabel.s(16)),
                             backgroundColor: CBColors.BackgroundColor,
                             actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(l.l.global.cancel, style: CBTS.regular.primaryLabel.s(16)),
+                              ),
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                   vm.saveRecipe();
                                 },
                                 child: Text("OK", style: CBTS.regular.s(16).copyWith(color: CBColors.ErrorColor)),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text(l.l.global.cancel, style: CBTS.regular.primaryLabel.s(16)),
                               ),
                             ],
                           );
@@ -100,7 +103,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                     Container(
                       height: 200,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: RADIUS8,
                           image: args.recipe.instance.imageUrl != null
                               ? DecorationImage(
                                   image: NetworkImage(args.recipe.instance.imageUrl!),
@@ -122,7 +125,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                       height: 100,
                       decoration: BoxDecoration(
                         color: CBColors.PrimaryColor,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: RADIUS8,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -135,7 +138,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    FontAwesomeIcons.ConciergeBell,
+                                    args.recipe.instance.foodType!.getIcon(),
                                     style: CBTS.fa.btn.s(16),
                                   ),
                                   Text(
@@ -221,18 +224,18 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                               child: Material(
                                 elevation: 1,
                                 color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: RADIUS8,
                                 child: Container(
                                   height: 64,
                                   decoration: BoxDecoration(
                                     color: CBColors.ListItemBackgroundColor,
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius: RADIUS8,
                                   ),
                                   child: Row(
                                     children: [
                                       if ((ingredientAmount.ingredient!.oneOf.value as IngredientListModel).imageUrl != null)
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius: RADIUS8,
                                           child: Image.network((ingredientAmount.ingredient!.oneOf.value as IngredientListModel).imageUrl!, width: 64, height: 64),
                                         )
                                       else
@@ -241,7 +244,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                           height: 64,
                                           decoration: BoxDecoration(
                                             color: CBColors.PrimaryColor,
-                                            borderRadius: BorderRadius.circular(8),
+                                            borderRadius: RADIUS8,
                                           ),
                                           child: Center(
                                             child: Text(
@@ -272,13 +275,13 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                       )
-                      else
-                        Center(
-                          child: Text(
-                            l.l.recipe.recipeDetail_noIngredients,
-                            style: CBTS.regular.primaryLabel.s(16),
-                          ),
+                    else
+                      Center(
+                        child: Text(
+                          l.l.recipe.recipeDetail_noIngredients,
+                          style: CBTS.regular.primaryLabel.s(16),
                         ),
+                      ),
                     const SizedBox(height: 24),
                     Text(
                       l.l.recipe.recipeDetail_steps,

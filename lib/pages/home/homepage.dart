@@ -2,6 +2,7 @@ import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/const/fa_icons.dart';
 import 'package:cookbook/const/fonts.dart';
+import 'package:cookbook/const/style.dart';
 import 'package:cookbook/pages/main_tabs/ingredients_tab.dart';
 import 'package:cookbook/pages/main_tabs/recipes_tab.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
@@ -40,7 +41,7 @@ class _CookbookHomePageState extends State<CookbookHomePage> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
-    CBTexts l = context.watch<LocalizationProvider>().l; 
+    CBTexts l = context.watch<LocalizationProvider>().l;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: CBColors.NavigationBarBackgroundColor,
@@ -61,7 +62,7 @@ class _CookbookHomePageState extends State<CookbookHomePage> with SingleTickerPr
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           NavModel? model;
-          if(tabController.index == 0) {
+          if (tabController.index == 0) {
             Fluttertoast.showToast(msg: l.global.NIY);
             // model = Navigator.of(context).push(NavConstants.recipeEditRoute());
           } else {
@@ -79,10 +80,10 @@ class _CookbookHomePageState extends State<CookbookHomePage> with SingleTickerPr
         height: 72,
         decoration: BoxDecoration(
           color: CBColors.NavigationBarBackgroundColor,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black38,
-              offset: const Offset(0, -1),
+              offset: Offset(0, -1),
               blurRadius: 1,
             ),
           ],
@@ -90,9 +91,9 @@ class _CookbookHomePageState extends State<CookbookHomePage> with SingleTickerPr
         child: TabBar(
           indicatorSize: TabBarIndicatorSize.label,
           indicator: UnderlineTabIndicator(
-                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(4), topRight: Radius.circular(4)),
-                                  borderSide: BorderSide(width: 4, color: CBColors.PrimaryColor),
-                                ),
+            borderRadius: TRADIUS4,
+            borderSide: BorderSide(width: 4, color: CBColors.PrimaryColor),
+          ),
           controller: tabController,
           labelColor: CBColors.PrimaryColor,
           unselectedLabelColor: CBColors.UnselectedColor,
