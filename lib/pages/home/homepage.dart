@@ -15,6 +15,7 @@ import 'package:cookbook/viewmodel/ingredients_vm.dart';
 import 'package:cookbook/viewmodel/recipes_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:one_of/one_of.dart';
 import 'package:provider/provider.dart';
 
 class CookbookHomePage extends StatefulWidget {
@@ -66,7 +67,9 @@ class _CookbookHomePageState extends State<CookbookHomePage> with SingleTickerPr
             Fluttertoast.showToast(msg: l.global.NIY);
             // model = Navigator.of(context).push(NavConstants.recipeEditRoute());
           } else {
-            model = await Navigator.of(context).push(NavConstants.ingredientEditRoute(IngredientDetailArgs(RecipeDetailIngredientModelAllOfIngredient())));
+            model = await Navigator.of(context).push(NavConstants.ingredientEditRoute(IngredientDetailArgs(RecipeDetailIngredientModelAllOfIngredient((u) {
+              u.oneOf = OneOf.fromValue1(value: IngredientListModel());
+            }))));
           }
           if (model != null && model.refresh) {
             recipesTabVM.refresh();
@@ -77,7 +80,7 @@ class _CookbookHomePageState extends State<CookbookHomePage> with SingleTickerPr
         child: Text(FontAwesomeIcons.Plus, style: CBTS.fa.primaryLabel.s(24)),
       ),
       bottomNavigationBar: Container(
-        height: 72,
+        height: 56,
         decoration: BoxDecoration(
           color: CBColors.NavigationBarBackgroundColor,
           boxShadow: const [
@@ -92,23 +95,28 @@ class _CookbookHomePageState extends State<CookbookHomePage> with SingleTickerPr
           indicatorSize: TabBarIndicatorSize.label,
           indicator: UnderlineTabIndicator(
             borderRadius: TRADIUS4,
-            borderSide: BorderSide(width: 4, color: CBColors.PrimaryColor),
+            borderSide: BorderSide(width: 2, color: CBColors.PrimaryColor),
           ),
           controller: tabController,
           labelColor: CBColors.PrimaryColor,
           unselectedLabelColor: CBColors.UnselectedColor,
+          labelStyle: CBTS.regular,
           tabs: [
             Tab(
               text: l.home.tab_recipes,
               icon: const Icon(
                 IconData(0xf02d, fontFamily: Fonts.FontAwesome),
+                size: 24,
               ),
+              iconMargin: const EdgeInsets.only(bottom: 0),
             ),
             Tab(
               text: l.home.tab_ingredients,
               icon: const Icon(
                 IconData(0xf4d8, fontFamily: Fonts.FontAwesome),
+                size: 24,
               ),
+              iconMargin: const EdgeInsets.only(bottom: 0),
             ),
           ],
         ),

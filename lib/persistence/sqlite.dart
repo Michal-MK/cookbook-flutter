@@ -1,5 +1,6 @@
 import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/viewmodel/model/recipe_detail_model_ext.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -22,7 +23,9 @@ class SQLite {
   Future init() async {
     databaseFactory = databaseFactoryFfi;
 
-    await wipe();
+    if (kDebugMode) {
+      await wipe();
+    }
 
     _database = await openDatabase(
       await path,
