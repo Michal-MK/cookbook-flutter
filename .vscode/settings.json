@@ -35,6 +35,7 @@
         "microtask",
         "openapi",
         "prefs",
+        "refreshable",
         "splashscreen",
         "sqflite",
         "unfocus",

@@ -1,13 +1,14 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cookbook/persistence/sqlite.dart';
 import 'package:cookbook/texts/localization_provider.dart';
+import 'package:cookbook/viewmodel/interfaces/refreshable.dart';
 import 'package:cookbook/viewmodel/model/cb_recipe_list_model.dart';
 import 'package:cookbook/viewmodel/model/recipe_detail_model_ext.dart';
 import 'package:cookbook/web_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class RecipesTabVM extends ChangeNotifier {
+class RecipesTabVM extends ChangeNotifier implements IRefreshable {
   List<CBRecipeListModel>? remoteRecipes;
   List<CBRecipeListModel>? localRecipes;
   List<CBRecipeListModel> get recipes => {...localRecipes ?? [], ...remoteRecipes ?? []}.toList();
@@ -28,6 +29,7 @@ class RecipesTabVM extends ChangeNotifier {
     });
   }
 
+  @override
   Future refresh() async {
     remoteRecipes = null;
     localRecipes = null;

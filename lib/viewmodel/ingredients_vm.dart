@@ -1,11 +1,12 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/texts/localization_provider.dart';
+import 'package:cookbook/viewmodel/interfaces/refreshable.dart';
 import 'package:cookbook/web_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class IngredientsTabVM extends ChangeNotifier {
+class IngredientsTabVM extends ChangeNotifier implements IRefreshable {
   List<IngredientListModel>? ingredients;
 
   Future init() async {
@@ -14,6 +15,7 @@ class IngredientsTabVM extends ChangeNotifier {
     notifyListeners();
   }
 
+  @override
   Future refresh() async {
     var connectivity = await Connectivity().checkConnectivity();
     if (connectivity == ConnectivityResult.none) {

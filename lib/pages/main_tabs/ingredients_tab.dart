@@ -1,15 +1,12 @@
-import 'package:cookbook/api/lib/openapi.dart';
-import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/controls/cb_shimmer.dart';
+import 'package:cookbook/controls/ingredients/ingredient_list_view.dart';
 import 'package:cookbook/controls/sliver_persistent_header_delegate_impl.dart';
-import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
 import 'package:cookbook/texts/localization_provider.dart';
 import 'package:cookbook/themes/colors.dart';
 import 'package:cookbook/themes/theme_provider.dart';
 import 'package:cookbook/viewmodel/ingredients_vm.dart';
 import 'package:flutter/material.dart';
-import 'package:one_of/one_of.dart';
 import 'package:provider/provider.dart';
 
 class IngredientsTab extends StatefulWidget {
@@ -68,62 +65,7 @@ class _IngredientsTabState extends State<IngredientsTab> {
                         ),
                       );
                     }
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0),
-                      child: Material(
-                        elevation: 1,
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(8),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: CBColors.ListItemBackgroundColor,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: InkWell(
-                            onTap: () async {
-                              NavModel? model = await Navigator.of(context).push(
-                                NavConstants.ingredientDetailRoute(
-                                  args: IngredientDetailArgs(RecipeDetailIngredientModelAllOfIngredient((b) => b
-                                    ..oneOf = OneOf.fromValue1(
-                                      value: IngredientListModel((b) => b
-                                        ..id = ingredient.id
-                                        ..name = ingredient.name
-                                        ..imageUrl = ingredient.imageUrl),
-                                    ))),
-                                ),
-                              );
-                              if (model != null && model.refresh) {
-                                await vm.refresh();
-                              }
-                            },
-                            borderRadius: BorderRadius.circular(8),
-                            child: Row(
-                              children: [
-                                if (ingredient.imageUrl != null)
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.network(ingredient.imageUrl!, width: 64, height: 64),
-                                  )
-                                else
-                                  Container(
-                                    width: 64,
-                                    height: 64,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      image: const DecorationImage(image: AssetImage("assets/img/ingredient_placeholder.jpg")),
-                                    ),
-                                  ),
-                                const SizedBox(width: 16),
-                                Text(ingredient.name!, style: CBTS.regular.primaryLabel.s(16)),
-                                const Spacer(),
-                                Icon(Icons.edit, color: CBColors.PrimaryColor, size: 32),
-                                const SizedBox(width: 16),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
+                    return IngredientListViewItem(ingredient: ingredient, refreshable: vm);
                   },
                 ),
               ),

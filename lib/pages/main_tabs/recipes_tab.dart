@@ -1,9 +1,6 @@
-import 'package:cookbook/api/lib/openapi.dart';
-import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/controls/cb_shimmer.dart';
+import 'package:cookbook/controls/ingredients/recipe_list_view.dart';
 import 'package:cookbook/controls/sliver_persistent_header_delegate_impl.dart';
-import 'package:cookbook/fa_icons.dart';
-import 'package:cookbook/pages/nav/recipe_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
 import 'package:cookbook/texts/localization_provider.dart';
 import 'package:cookbook/themes/colors.dart';
@@ -68,133 +65,7 @@ class _RecipesTabState extends State<RecipesTab> {
                       );
                     }
 
-                    var recipe = vm.recipes[idx];
-
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
-                      child: InkWell(
-                        onTap: () async {
-                          NavModel? model = await Navigator.of(context).push(NavConstants.recipeDetailRoute(args: RecipeDetailArgs(recipe)));
-                          if (model != null && model.refresh) {
-                            await vm.refresh();
-                          }
-                        },
-                        child: Material(
-                          elevation: 1,
-                          borderRadius: BorderRadius.circular(8),
-                          child: Container(
-                            height: 200,
-                            decoration: BoxDecoration(
-                              color: CBColors.ListItemBackgroundColor,
-                              borderRadius: BorderRadius.circular(8),
-                              image: recipe.instance.imageUrl != null
-                                  ? DecorationImage(
-                                      image: NetworkImage(recipe.instance.imageUrl!),
-                                      fit: BoxFit.cover,
-                                    )
-                                  : const DecorationImage(
-                                      image: AssetImage("assets/img/recipe_placeholder.jpg"),
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 8.0, left: 8.0),
-                                    child: Container(
-                                      height: 24,
-                                      decoration: BoxDecoration(
-                                        color: getFoodColor(recipe.instance.foodType).withOpacity(0.75),
-                                        borderRadius: BorderRadius.circular(4),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          const SizedBox(width: 16),
-                                          Text(getIcon(recipe.instance.foodType), style: CBTS.fa.btn.s(16)),
-                                          const SizedBox(width: 4),
-                                          Text(l.l.foodTypeToString(recipe.instance.foodType), style: CBTS.regular.btn.s(16)),
-                                          const SizedBox(width: 16),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const Spacer(flex: 1),
-                                InkWell(
-                                  onTap: () async {
-                                    _ = await showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          backgroundColor: CBColors.BackgroundColor,
-                                          title: Text(l.l.recipe_persistenceIconMeaningTitle, style: CBTS.regular.primary.s(16)),
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              ListTile(
-                                                leading: Container(
-                                                  height: 24,
-                                                  width: 24,
-                                                  decoration: BoxDecoration(
-                                                    color: getFoodColor(recipe.instance.foodType!).withOpacity(0.75),
-                                                    borderRadius: BorderRadius.circular(4),
-                                                  ),
-                                                  child: Icon(Icons.cloud, color: CBColors.PrimaryButtonTextColor, size: 14),
-                                                ),
-                                                title: Text(l.l.recipe_persistenceIconMeaningRemote, style: CBTS.regular.primaryLabel.s(16)),
-                                              ),
-                                              ListTile(
-                                                leading: Container(
-                                                  height: 24,
-                                                  width: 24,
-                                                  decoration: BoxDecoration(
-                                                    color: getFoodColor(recipe.instance.foodType!).withOpacity(0.75),
-                                                    borderRadius: BorderRadius.circular(4),
-                                                  ),
-                                                  child: Icon(Icons.storage, color: CBColors.PrimaryButtonTextColor, size: 14),
-                                                ),
-                                                title: Text(l.l.recipe_persistenceIconMeaningLocal, style: CBTS.regular.primaryLabel.s(16)),
-                                              ),
-                                            ],
-                                          ),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text("OK", style: CBTS.regular.primaryLabel.s(16)),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                  child: SizedBox(
-                                    width: 40,
-                                    height: 40,
-                                    child: Center(
-                                      child: Container(
-                                        height: 24,
-                                        width: 24,
-                                        decoration: BoxDecoration(
-                                          color: getFoodColor(recipe.instance.foodType).withOpacity(0.75),
-                                          borderRadius: BorderRadius.circular(4),
-                                        ),
-                                        child: Icon(recipe.localInstance != null ? Icons.storage : Icons.cloud, color: CBColors.PrimaryButtonTextColor, size: 14),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
+                    return RecipeListViewItem(recipe: vm.recipes[idx], refreshable: vm);
                   },
                 ),
               ),
@@ -203,31 +74,5 @@ class _RecipesTabState extends State<RecipesTab> {
         );
       },
     );
-  }
-
-  String getIcon(FoodType? foodType) {
-    switch (foodType) {
-      case FoodType.number1: // Main dish
-        return FontAwesomeIcons.ConciergeBell;
-      case FoodType.number2: // Soup
-        return FontAwesomeIcons.UtensilSpoon;
-      case FoodType.number3: // Dessert
-        return FontAwesomeIcons.IceCream;
-      case _:
-        return FontAwesomeIcons.Question;
-    }
-  }
-}
-
-Color getFoodColor(FoodType? foodType) {
-  switch (foodType) {
-    case FoodType.number1: // Main dish
-      return CBColors.MainDishFoodTypeColor;
-    case FoodType.number2: // Soup
-      return CBColors.SoupFoodTypeColor;
-    case FoodType.number3: // Dessert
-      return CBColors.DessertFoodTypeColor;
-    case _:
-      return CBColors.UnknownFoodTypeColor;
   }
 }
