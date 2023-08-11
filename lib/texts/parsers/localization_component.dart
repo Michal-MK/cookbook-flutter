@@ -18,7 +18,7 @@ class Compartment {
     String str;
 
 		bool isArgument;
-		bool get isPlain => !isArgument && !isBackReference().$1;
+		bool get isPlain => !isArgument && !isBackReference().tf;
 
 		List<String> get split => str.split(RegExp('[:|]'));
 
@@ -32,12 +32,12 @@ class Compartment {
 
 		int get id => int.parse(split[0]);
 
-		(bool tf, int? refID) isBackReference() {
+		({bool tf, int? refID}) isBackReference() {
 			int? refID = -1;
-			if (str.length <= 1) return (false, refID);
+			if (str.length <= 1) return (tf: false, refID: refID);
 			refID = int.tryParse(str[1].toString());
 
-			return (isArgument && str.length > 1 && str[0] == 'r' && refID != null, refID);
+			return (tf: isArgument && str.length > 1 && str[0] == 'r' && refID != null, refID: refID);
 		}
 
     @override
@@ -48,13 +48,13 @@ class Compartment {
 		String process(List<Compartment> parts, List<Object> args) {
 			if (processedString != null) return processedString!;
 
-      var (bool tf, int? refID) = isBackReference();
+      var backReference = isBackReference();
 
-			if (tf) {
-				Compartment origin = findOrigin(refID!, parts);
+			if (backReference.tf) {
+				Compartment origin = findOrigin(backReference.refID!, parts);
 				origin.process(parts, args);
 
-				Object arg = args[refID];
+				Object arg = args[backReference.refID!];
 				for (int i = 1; i < split.length; i += 2) {
 					LocalizationRule rule = LocalizationRule(split[i], split[i + 1]);
 					if (rule.isMatch(arg.toString())) {
