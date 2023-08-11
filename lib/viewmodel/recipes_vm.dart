@@ -55,7 +55,7 @@ class RecipesTabVM extends ChangeNotifier implements IRefreshable {
     if (connectivity == ConnectivityResult.none) {
       remoteRecipes = [];
       notifyListeners();
-      Fluttertoast.showToast(msg: LocalizationProvider.instance.l.state_noInternet);
+      Fluttertoast.showToast(msg: LocalizationProvider.instance.l.global.state_noInternet);
       return true; // This should not be a bool
     }
     return false;

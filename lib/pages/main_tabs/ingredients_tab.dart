@@ -44,7 +44,7 @@ class _IngredientsTabState extends State<IngredientsTab> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
-                      child: Text(l.l.home_ingredientsTab, style: CBTS.bold.primary.s(24)),
+                      child: Text(l.l.home.tab_ingredients, style: CBTS.bold.primary.s(24)),
                     ),
                   ),
                 ),

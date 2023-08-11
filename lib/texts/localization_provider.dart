@@ -1,7 +1,7 @@
 import 'package:cookbook/const/preferences.dart';
-import 'package:cookbook/texts/cs.dart';
-import 'package:cookbook/texts/en.dart';
-import 'package:cookbook/texts/texts.dart';
+import 'package:cookbook/texts/cs/cs.dart';
+import 'package:cookbook/texts/en/en.dart';
+import 'package:cookbook/texts/generic/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

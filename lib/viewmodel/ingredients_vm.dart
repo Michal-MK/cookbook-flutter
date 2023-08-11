@@ -21,7 +21,7 @@ class IngredientsTabVM extends ChangeNotifier implements IRefreshable {
     if (connectivity == ConnectivityResult.none) {
       ingredients = [];
       notifyListeners();
-      Fluttertoast.showToast(msg: LocalizationProvider.instance.l.state_noInternet);
+      Fluttertoast.showToast(msg: LocalizationProvider.instance.l.global.state_noInternet);
       return;
     }
     ingredients = null;

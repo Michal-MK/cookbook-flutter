@@ -48,20 +48,20 @@ class RecipeDetailPageVM extends ChangeNotifier {
     isLocal = true;
     notifyListeners();
     refreshOnPop ^= true;
-    Fluttertoast.showToast(msg: LocalizationProvider.instance.l.recipeDetail_recipeSaved);
+    Fluttertoast.showToast(msg: LocalizationProvider.instance.l.recipe.recipeDetail_recipeSaved);
   }
 
   Future deleteRecipe() async {
-    Fluttertoast.showToast(msg: LocalizationProvider.instance.l.generic_notImplemented);
+    Fluttertoast.showToast(msg: LocalizationProvider.instance.l.global.NIY);
     // await RecipesApi().deleteRecipe(recipe!.id!);
   }
 
   Future shareRecipe() async {
     var l = LocalizationProvider.instance.l;
-    Share.share(l.smartFormat(l.recipeDetail_shareText, [recipe!.name!]), subject: l.elem_recipe);
+    Share.share(l.smartFormat(l.recipe.recipeDetail_shareText, [recipe!.name!]), subject: l.recipe.singular);
   }
 
   Future editRecipe() async {
-    Fluttertoast.showToast(msg: LocalizationProvider.instance.l.generic_notImplemented);
+    Fluttertoast.showToast(msg: LocalizationProvider.instance.l.global.NIY);
   }
 }

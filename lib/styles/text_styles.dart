@@ -1,4 +1,4 @@
-import 'package:cookbook/fonts.dart';
+import 'package:cookbook/const/fonts.dart';
 import 'package:cookbook/themes/colors.dart';
 import 'package:flutter/material.dart';
 

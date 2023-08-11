@@ -38,7 +38,7 @@ class _IngredientDetailPageState extends State<IngredientDetailPage> {
           child: Scaffold(
             backgroundColor: CBColors.BackgroundColor,
             appBar: AppBar(
-              title: Text(l.l.elem_ingredient, style: CBTS.regular.nav),
+              title: Text(l.l.ingredient.singular, style: CBTS.regular.nav),
               backgroundColor: CBColors.NavigationBarBackgroundColor,
               actions: [
                 IconButton(

@@ -18,12 +18,12 @@ class IngredientDetailPageVM extends ChangeNotifier {
   }
 
   Future deleteIngredient() async {
-    Fluttertoast.showToast(msg: LocalizationProvider.instance.l.generic_notImplemented);
+    Fluttertoast.showToast(msg: LocalizationProvider.instance.l.global.NIY);
     // await IngredientsApi().deleteIngredient(ingredient!.id!);
   }
 
   Future shareIngredient() async {
     var l = LocalizationProvider.instance.l;
-    await Share.share(l.smartFormat(l.ingredientDetail_shareText, [ingredient!.name!]), subject: l.elem_ingredient);
+    await Share.share(l.smartFormat(l.ingredient.ingredientDetail_shareText, [ingredient!.name!]), subject: l.ingredient.singular);
   }
 }

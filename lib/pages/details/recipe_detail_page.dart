@@ -1,6 +1,6 @@
 import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
-import 'package:cookbook/fa_icons.dart';
+import 'package:cookbook/const/fa_icons.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
 import 'package:cookbook/pages/nav/recipe_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
@@ -40,7 +40,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
           child: Scaffold(
             backgroundColor: CBColors.BackgroundColor,
             appBar: AppBar(
-              title: Text(l.l.elem_recipe, style: CBTS.regular.nav),
+              title: Text(l.l.recipe.singular, style: CBTS.regular.nav),
               backgroundColor: CBColors.NavigationBarBackgroundColor,
               actions: [
                 IconButton(
@@ -50,7 +50,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text(l.l.recipeDetail_deleteLocalRecipe, style: CBTS.regular.primary.s(16)),
+                            title: Text(l.l.recipe.recipeDetail_deleteLocalRecipe, style: CBTS.regular.primary.s(16)),
                             backgroundColor: CBColors.BackgroundColor,
                             actions: [
                               TextButton(
@@ -64,7 +64,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text(l.l.generic_cancel, style: CBTS.regular.primaryLabel.s(16)),
+                                child: Text(l.l.global.cancel, style: CBTS.regular.primaryLabel.s(16)),
                               ),
                             ],
                           );
@@ -139,7 +139,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                     style: CBTS.fa.btn.s(16),
                                   ),
                                   Text(
-                                    l.l.foodTypeToString(args.recipe.instance.foodType!),
+                                    l.l.enum_foodType.get(args.recipe.instance.foodType!),
                                     textAlign: TextAlign.center,
                                     style: CBTS.regular.btn.s(14),
                                   )
@@ -157,12 +157,12 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                   ),
                                   if (vm.recipe != null)
                                     Text(
-                                      l.l.smartFormat(l.l.recipeDetail_duration, [vm.recipe!.duration!]),
+                                      l.l.smartFormat(l.l.recipe.recipeDetail_duration, [vm.recipe!.duration!]),
                                       style: CBTS.regular.btn.s(14),
                                     )
                                   else
                                     Text(
-                                      l.l.smartFormat(l.l.recipeDetail_duration, ['-']),
+                                      l.l.smartFormat(l.l.recipe.recipeDetail_duration, ['-']),
                                       textAlign: TextAlign.center,
                                       style: CBTS.regular.btn.s(14),
                                     )
@@ -180,7 +180,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                   ),
                                   if (vm.recipe != null)
                                     Text(
-                                      l.l.smartFormat(l.l.recipeDetail_ingredientCount, [vm.recipe!.ingredientAmounts!.length]),
+                                      l.l.smartFormat(l.l.recipe.recipeDetail_ingredientCount, [vm.recipe!.ingredientAmounts!.length]),
                                       textAlign: TextAlign.center,
                                       style: CBTS.regular.btn.s(14),
                                     )
@@ -198,7 +198,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      l.l.home_ingredientsTab,
+                      l.l.home.tab_ingredients,
                       style: CBTS.bold.primary.s(24),
                     ),
                     const SizedBox(height: 24),
@@ -257,7 +257,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                       ),
                                       const Spacer(),
                                       Text(
-                                        "${ingredientAmount.amount} ${l.l.unitToString(ingredientAmount.unit!)}",
+                                        "${ingredientAmount.amount} ${l.l.enum_unit.get(ingredientAmount.unit!)}",
                                         style: CBTS.regular.primaryLabel.s(14),
                                       ),
                                       const SizedBox(width: 16),
@@ -275,13 +275,13 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                       else
                         Center(
                           child: Text(
-                            l.l.recipeDetail_noIngredients,
+                            l.l.recipe.recipeDetail_noIngredients,
                             style: CBTS.regular.primaryLabel.s(16),
                           ),
                         ),
                     const SizedBox(height: 24),
                     Text(
-                      l.l.recipeDetail_steps,
+                      l.l.recipe.recipeDetail_steps,
                       style: CBTS.bold.primary.s(24),
                     ),
                     const SizedBox(height: 24),

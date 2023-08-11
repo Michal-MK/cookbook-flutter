@@ -69,7 +69,7 @@ class RecipeListViewItem extends StatelessWidget {
                               const SizedBox(width: 16),
                               Text(recipe.instance.foodType!.getIcon(), style: CBTS.fa.btn.s(16)),
                               const SizedBox(width: 4),
-                              Text(l.l.foodTypeToString(recipe.instance.foodType), style: CBTS.regular.btn.s(16)),
+                              Text(l.l.enum_foodType.get(recipe.instance.foodType), style: CBTS.regular.btn.s(16)),
                               const SizedBox(width: 16),
                             ],
                           ),
@@ -84,7 +84,7 @@ class RecipeListViewItem extends StatelessWidget {
                           builder: (context) {
                             return AlertDialog(
                               backgroundColor: CBColors.BackgroundColor,
-                              title: Text(l.l.recipe_persistenceIconMeaningTitle, style: CBTS.regular.primary.s(16)),
+                              title: Text(l.l.recipe.recipe_persistenceIconMeaningTitle, style: CBTS.regular.primary.s(16)),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -98,7 +98,7 @@ class RecipeListViewItem extends StatelessWidget {
                                       ),
                                       child: Icon(Icons.cloud, color: CBColors.PrimaryButtonTextColor, size: 14),
                                     ),
-                                    title: Text(l.l.recipe_persistenceIconMeaningRemote, style: CBTS.regular.primaryLabel.s(16)),
+                                    title: Text(l.l.recipe.recipe_persistenceIconMeaningRemote, style: CBTS.regular.primaryLabel.s(16)),
                                   ),
                                   ListTile(
                                     leading: Container(
@@ -110,7 +110,7 @@ class RecipeListViewItem extends StatelessWidget {
                                       ),
                                       child: Icon(Icons.storage, color: CBColors.PrimaryButtonTextColor, size: 14),
                                     ),
-                                    title: Text(l.l.recipe_persistenceIconMeaningLocal, style: CBTS.regular.primaryLabel.s(16)),
+                                    title: Text(l.l.recipe.recipe_persistenceIconMeaningLocal, style: CBTS.regular.primaryLabel.s(16)),
                                   ),
                                 ],
                               ),

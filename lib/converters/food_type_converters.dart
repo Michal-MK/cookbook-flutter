@@ -1,5 +1,5 @@
 import 'package:cookbook/api/lib/openapi.dart';
-import 'package:cookbook/fa_icons.dart';
+import 'package:cookbook/const/fa_icons.dart';
 import 'package:cookbook/themes/colors.dart';
 import 'package:flutter/material.dart';
 

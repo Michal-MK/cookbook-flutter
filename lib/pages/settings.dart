@@ -2,7 +2,7 @@ import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/const/preferences.dart';
 import 'package:cookbook/styles/text_styles.dart';
 import 'package:cookbook/texts/localization_provider.dart';
-import 'package:cookbook/texts/texts.dart';
+import 'package:cookbook/texts/generic/texts.dart';
 import 'package:cookbook/themes/colors.dart';
 import 'package:cookbook/themes/theme_provider.dart';
 import 'package:countries_flag/countries_flag.dart';
@@ -46,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
         appBar: AppBar(
           backgroundColor: CBColors.NavigationBarBackgroundColor,
           title: Text(
-            l.settings_title,
+            l.settings.title,
             style: CBTS.regular.nav,
           ),
         ),
@@ -56,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
             const SizedBox(height: 16),
             ListTile(
               title: Text(
-                l.settings_theme,
+                l.settings.theme,
                 style: CBTS.regular.primaryLabel,
               ),
               onTap: () {
@@ -76,14 +76,14 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(l.theme_light, style: CBTS.regular.primary),
+                      Text(l.global.theme_light, style: CBTS.regular.primary),
                       IgnorePointer(
                         child: Switch(
                           value: !isLightTheme,
                           onChanged: (value) {},
                         ),
                       ),
-                      Text(l.theme_dark, style: CBTS.regular.primary),
+                      Text(l.global.theme_dark, style: CBTS.regular.primary),
                     ],
                   ),
                 ),
@@ -91,7 +91,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             ListTile(
               title: Text(
-                l.settings_language,
+                l.settings.language,
                 style: CBTS.regular.primaryLabel,
               ),
               onTap: () async {

@@ -1,14 +1,14 @@
 import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
-import 'package:cookbook/fa_icons.dart';
-import 'package:cookbook/fonts.dart';
+import 'package:cookbook/const/fa_icons.dart';
+import 'package:cookbook/const/fonts.dart';
 import 'package:cookbook/pages/main_tabs/ingredients_tab.dart';
 import 'package:cookbook/pages/main_tabs/recipes_tab.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
-import 'package:cookbook/side_menu_drawer.dart';
+import 'package:cookbook/pages/home/side_menu_drawer.dart';
 import 'package:cookbook/styles/text_styles.dart';
 import 'package:cookbook/texts/localization_provider.dart';
-import 'package:cookbook/texts/texts.dart';
+import 'package:cookbook/texts/generic/texts.dart';
 import 'package:cookbook/themes/colors.dart';
 import 'package:cookbook/viewmodel/ingredients_vm.dart';
 import 'package:cookbook/viewmodel/recipes_vm.dart';
@@ -62,7 +62,7 @@ class _CookbookHomePageState extends State<CookbookHomePage> with SingleTickerPr
         onPressed: () async {
           NavModel? model;
           if(tabController.index == 0) {
-            Fluttertoast.showToast(msg: l.generic_notImplemented);
+            Fluttertoast.showToast(msg: l.global.NIY);
             // model = Navigator.of(context).push(NavConstants.recipeEditRoute());
           } else {
             model = await Navigator.of(context).push(NavConstants.ingredientEditRoute(IngredientDetailArgs(RecipeDetailIngredientModelAllOfIngredient())));
@@ -98,13 +98,13 @@ class _CookbookHomePageState extends State<CookbookHomePage> with SingleTickerPr
           unselectedLabelColor: CBColors.UnselectedColor,
           tabs: [
             Tab(
-              text: l.home_recipesTab,
+              text: l.home.tab_recipes,
               icon: const Icon(
                 IconData(0xf02d, fontFamily: Fonts.FontAwesome),
               ),
             ),
             Tab(
-              text: l.home_ingredientsTab,
+              text: l.home.tab_ingredients,
               icon: const Icon(
                 IconData(0xf4d8, fontFamily: Fonts.FontAwesome),
               ),

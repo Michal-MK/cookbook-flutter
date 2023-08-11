@@ -5,7 +5,7 @@ import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
 import 'package:cookbook/texts/localization_provider.dart';
-import 'package:cookbook/texts/texts.dart';
+import 'package:cookbook/texts/generic/texts.dart';
 import 'package:cookbook/themes/colors.dart';
 import 'package:cookbook/web_client.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +73,7 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
       child: Scaffold(
         backgroundColor: CBColors.BackgroundColor,
         appBar: AppBar(
-          title: Text(l.elem_ingredient),
+          title: Text(l.ingredient.singular),
           backgroundColor: CBColors.NavigationBarBackgroundColor,
         ),
         body: CustomScrollView(
@@ -92,7 +92,7 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
                         controller: nameController,
                         style: CBTS.regular.primaryLabel,
                         decoration: InputDecoration(
-                          labelText: l.ingredientEdit_name,
+                          labelText: l.ingredient.ingredientEdit_name,
                           labelStyle: CBTS.regular.primaryLabel,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -101,7 +101,7 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
                           ),
                           border: const OutlineInputBorder(),
                         ),
-                        validator: (value) => value!.isEmpty ? l.ingredientEdit_nameEmptyValidation : null,
+                        validator: (value) => value!.isEmpty ? l.ingredient.ingredientEdit_nameEmptyValidation : null,
                       ),
                     ),
                     Padding(
@@ -170,7 +170,7 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
                                   }
                                 },
                                 child: Text(
-                                  l.ingredientEdit_uploadImageButtonText,
+                                  l.ingredient.ingredientEdit_uploadImageButtonText,
                                   style: CBTS.regular.btn,
                                 ),
                               ),
@@ -202,12 +202,12 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
                                           color: CBColors.FormEntryBorderColor,
                                         ),
                                       ),
-                                      labelText: l.ingredientEdit_description,
+                                      labelText: l.ingredient.ingredientEdit_description,
                                       labelStyle: CBTS.regular.primaryLabel,
                                       fillColor: CBColors.ListItemBackgroundColor,
                                       border: const OutlineInputBorder(),
                                     ),
-                                    validator: (value) => value!.isEmpty ? l.ingredientEdit_descriptionEmptyValidation : null,
+                                    validator: (value) => value!.isEmpty ? l.ingredient.ingredientEdit_descriptionEmptyValidation : null,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
@@ -217,7 +217,7 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
                                       child: ElevatedButton(
                                         onPressed: () => saveIngredient(ingredient, l),
                                         child: Text(
-                                          l.ingredientEdit_saveButtonText,
+                                          l.ingredient.ingredientEdit_saveButtonText,
                                           style: CBTS.regular.btn,
                                         ),
                                       ),

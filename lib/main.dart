@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cookbook/const/nav_constants.dart';
-import 'package:cookbook/pages/homepage.dart';
+import 'package:cookbook/pages/home/homepage.dart';
 import 'package:cookbook/pages/splash.dart';
 import 'package:cookbook/persistence/sqlite.dart';
 import 'package:cookbook/texts/localization_provider.dart';

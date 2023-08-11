@@ -1,7 +1,7 @@
 import 'package:cookbook/const/nav_constants.dart';
-import 'package:cookbook/fonts.dart';
+import 'package:cookbook/const/fonts.dart';
 import 'package:cookbook/texts/localization_provider.dart';
-import 'package:cookbook/texts/texts.dart';
+import 'package:cookbook/texts/generic/texts.dart';
 import 'package:cookbook/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +36,7 @@ class SideMenuDrawer extends StatelessWidget {
                 color: CBColors.PrimaryColor,
               ),
               title: Text(
-                l.settings_title,
+                l.settings.title,
                 style: TextStyle(color: CBColors.PrimaryColor),
               ),
               onTap: () async {
