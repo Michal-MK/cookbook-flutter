@@ -1,20 +1,18 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:cookbook/api/lib/api.dart';
-import 'package:cookbook/const/nav_constants.dart';
+import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
 import 'package:cookbook/texts/localization_provider.dart';
 import 'package:cookbook/texts/texts.dart';
 import 'package:cookbook/themes/colors.dart';
+import 'package:cookbook/web_client.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:one_of/one_of.dart';
 import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
 
 class IngredientEditPage extends StatefulWidget {
   const IngredientEditPage({super.key});
@@ -41,13 +39,18 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
   void didChangeDependencies() {
     if (!firstInit) {
       args = ModalRoute.of(context)!.settings.arguments as IngredientDetailArgs;
-      nameController.text = args.ingredient.name ?? "";
+      var ingredientListModel = (args.ingredient.oneOf.value as IngredientListModel);
+      nameController.text = ingredientListModel.name ?? "";
 
-      if (args.ingredient.id != null) {
-        ingredientFuture = IngredientsApi().getIngredientById(args.ingredient.id!);
+      if (ingredientListModel.id != null) {
+        ingredientFuture = COOKBOOK.getIngredientsApi().getIngredientById(id: ingredientListModel.id!).then((value) => value.data!);
         ingredientFuture.then((value) => descriptionController.text = value!.description!);
       } else {
-        ingredientFuture = Future.value(IngredientDetailModel(name: "", description: "", imageUrl: null, id: null));
+        ingredientFuture = Future.value(IngredientDetailModel((b) => b
+          ..name = ""
+          ..description = ""
+          ..imageUrl = null
+          ..id = null));
       }
       firstInit = true;
     }
@@ -119,15 +122,15 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            if (args.ingredient.imageUrl != null && args.ingredient.imageUrl!.startsWith("http"))
+                            if ((args.ingredient.oneOf.value as IngredientListModel).imageUrl != null && (args.ingredient.oneOf.value as IngredientListModel).imageUrl!.startsWith("http"))
                               Image.network(
-                                args.ingredient.imageUrl!,
+                                (args.ingredient.oneOf.value as IngredientListModel).imageUrl!,
                               ),
-                            if (args.ingredient.imageUrl != null && !args.ingredient.imageUrl!.startsWith("http"))
+                            if ((args.ingredient.oneOf.value as IngredientListModel).imageUrl != null && !(args.ingredient.oneOf.value as IngredientListModel).imageUrl!.startsWith("http"))
                               Image.file(
-                                File(args.ingredient.imageUrl!),
+                                File((args.ingredient.oneOf.value as IngredientListModel).imageUrl!),
                               ),
-                            if (args.ingredient.imageUrl == null)
+                            if ((args.ingredient.oneOf.value as IngredientListModel).imageUrl == null)
                               Image.asset(
                                 "assets/img/ingredient_placeholder.jpg",
                               ),
@@ -158,7 +161,11 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
                                   if (croppedFile != null) {
                                     croppedData = await croppedFile.readAsBytes();
                                     setState(() {
-                                      args.ingredient.imageUrl = croppedFile.path;
+                                      args.ingredient.rebuild((p0) => p0.oneOf = OneOf.fromValue1(
+                                          value: IngredientListModel((b) => b
+                                            ..id = (args.ingredient.oneOf.value as IngredientListModel).id
+                                            ..name = (args.ingredient.oneOf.value as IngredientListModel).name
+                                            ..imageUrl = croppedFile.path)));
                                     });
                                   }
                                 },
@@ -241,36 +248,39 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
   }
 
   Future saveIngredient(IngredientDetailModel ingredient, CBTexts l) async {
-    FocusScope.of(context).unfocus();
+    //   FocusScope.of(context).unfocus();
 
-    ingredient.description = descriptionController.text;
-    ingredient.name = nameController.text;
+    //   ingredient.rebuild(
+    //     (b) => b
+    //       ..description = descriptionController.text
+    //       ..name = nameController.text,
+    //   );
 
-    if (!formKey.currentState!.validate()) return;
+    //   if (!formKey.currentState!.validate()) return;
 
-    Fluttertoast.showToast(msg: l.ingredientEdit_savingToast);
+    //   Fluttertoast.showToast(msg: l.ingredientEdit_savingToast);
 
-    if (args.ingredient.imageUrl != null && !args.ingredient.imageUrl!.startsWith("http")) {
-      // Local file
-      var imageId = Uuid().v4().toString();
-      String? uri = await ImagesApi().createImage(ImageModel(
-        id: imageId,
-        data: base64.encode(croppedData!),
-      ));
+    //   if (args.ingredient.imageUrl != null && !args.ingredient.imageUrl!.startsWith("http")) {
+    //     // Local file
+    //     var imageId = Uuid().v4().toString();
+    //     String? uri = await ImagesApi().createImage(ImageModel(
+    //       id: imageId,
+    //       data: base64.encode(croppedData!),
+    //     ));
 
-      if (uri != null) {
-        uri = uri.replaceAll("\"", "");
-        ingredient.imageUrl = uri;
-      }
-    }
-    if (ingredient.id == null) {
-      ingredient.id = Uuid().v4().toString();
-      await IngredientsApi().createIngredient(ingredient);
-    } else if (ingredient.id != null) {
-      await IngredientsApi().updateIngredient(ingredient);
-    }
-    await Fluttertoast.cancel();
-    args.ingredient.imageUrl = ingredient.imageUrl;
-    Navigator.of(context).pop(NavModel.withRefresh);
+    //     if (uri != null) {
+    //       uri = uri.replaceAll("\"", "");
+    //       ingredient.imageUrl = uri;
+    //     }
+    //   }
+    //   if (ingredient.id == null) {
+    //     ingredient.id = Uuid().v4().toString();
+    //     await IngredientsApi().createIngredient(ingredient);
+    //   } else if (ingredient.id != null) {
+    //     await IngredientsApi().updateIngredient(ingredient);
+    //   }
+    //   await Fluttertoast.cancel();
+    //   args.ingredient.imageUrl = ingredient.imageUrl;
+    //   Navigator.of(context).pop(NavModel.withRefresh);
   }
 }

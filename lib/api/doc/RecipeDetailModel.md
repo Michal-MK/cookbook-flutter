@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **description** | **String** |  | [optional] 
 **duration** | **String** |  | [optional] 
 **foodType** | [**FoodType**](FoodType.md) |  | [optional] 
-**ingredientAmounts** | [**List<RecipeDetailIngredientModel>**](RecipeDetailIngredientModel.md) |  | [optional] [default to const []]
+**ingredientAmounts** | [**BuiltList&lt;RecipeDetailIngredientModel&gt;**](RecipeDetailIngredientModel.md) |  | [optional] 
 **imageUrl** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

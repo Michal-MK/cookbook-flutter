@@ -1,4 +1,4 @@
-import 'package:cookbook/api/lib/api.dart';
+import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/fa_icons.dart';
 import 'package:cookbook/fonts.dart';
@@ -65,7 +65,7 @@ class _CookbookHomePageState extends State<CookbookHomePage> with SingleTickerPr
             Fluttertoast.showToast(msg: l.generic_notImplemented);
             // model = Navigator.of(context).push(NavConstants.recipeEditRoute());
           } else {
-            model = await Navigator.of(context).push(NavConstants.ingredientEditRoute(IngredientDetailArgs(RecipeDetailIngredientModelIngredient())));
+            model = await Navigator.of(context).push(NavConstants.ingredientEditRoute(IngredientDetailArgs(RecipeDetailIngredientModelAllOfIngredient())));
           }
           if (model != null && model.refresh) {
             recipesTabVM.refresh();

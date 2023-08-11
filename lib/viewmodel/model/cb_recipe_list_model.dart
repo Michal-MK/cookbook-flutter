@@ -1,4 +1,5 @@
-import 'package:cookbook/api/lib/api.dart';
+
+import 'package:cookbook/api/lib/openapi.dart';
 
 class CBRecipeListModel {
   

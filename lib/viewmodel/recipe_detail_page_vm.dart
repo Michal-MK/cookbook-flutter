@@ -1,14 +1,14 @@
-import 'package:cookbook/api/lib/api.dart';
+import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/persistence/sqlite.dart';
 import 'package:cookbook/texts/localization_provider.dart';
 import 'package:cookbook/viewmodel/model/recipe_detail_model_ext.dart';
+import 'package:cookbook/web_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class RecipeDetailPageVM extends ChangeNotifier {
-
   RecipeDetailModel? recipe;
   bool isLocal = false;
 
@@ -22,16 +22,17 @@ class RecipeDetailPageVM extends ChangeNotifier {
       isLocal = true;
       return;
     }
-    recipe = await RecipesApi().getRecipeById(id);
+    var response = await COOKBOOK.getRecipesApi().getRecipeById(id: id);
+    recipe = response.data;
     notifyListeners();
   }
 
   Future saveRecipe() async {
-    if(saveProcessing) {
+    if (saveProcessing) {
       return;
     }
     saveProcessing = true;
-    if(isLocal) {
+    if (isLocal) {
       await SQLite.instance.deleteRecipe(recipe!.id!);
       isLocal = false;
       notifyListeners();
@@ -39,7 +40,7 @@ class RecipeDetailPageVM extends ChangeNotifier {
       saveProcessing = false;
       return;
     }
-    for (var ingredient in recipe!.ingredientAmounts!){
+    for (var ingredient in recipe!.ingredientAmounts!) {
       SQLite.instance.database.insert('recipe_ingredients', ingredient.toMap(recipe!.id!), conflictAlgorithm: ConflictAlgorithm.ignore);
     }
     SQLite.instance.database.insert('recipes', recipe!.toMap());

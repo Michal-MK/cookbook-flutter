@@ -1,4 +1,4 @@
-import 'package:cookbook/api/lib/api.dart';
+import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/viewmodel/model/recipe_detail_model_ext.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -17,7 +17,7 @@ class SQLite {
 
   SQLite._();
 
-  Future<String> get path async => join((await getApplicationDocumentsDirectory()).path, 'cookbook.db'); 
+  Future<String> get path async => join((await getApplicationDocumentsDirectory()).path, 'cookbook.db');
 
   Future init() async {
     databaseFactory = databaseFactoryFfi;
@@ -48,12 +48,14 @@ class SQLite {
       var ingredientAmounts = await txn.query('recipe_ingredients');
       var ret = res.map((m) {
         var recipe = RecipeDetailModelExt.fromMap(m);
-        recipe.ingredientAmounts = ingredientAmounts
-            .where((ia) => ia['recipe_id'] == recipe.id)
-            .map(
-              (ia) => RecipeDetailIngredientModelExt.fromMap(ia),
-            )
-            .toList();
+        recipe.rebuild(
+          (b) => b
+            ..ingredientAmounts.addAll(
+              ingredientAmounts.where((ia) => ia['recipe_id'] == recipe.id).map(
+                    (ia) => RecipeDetailIngredientModelExt.fromMap(ia),
+                  ),
+            ),
+        );
         return recipe;
       }).toList();
       return ret;

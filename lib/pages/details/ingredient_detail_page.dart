@@ -1,3 +1,4 @@
+import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
@@ -20,7 +21,7 @@ class _IngredientDetailPageState extends State<IngredientDetailPage> {
   @override
   void didChangeDependencies() {
     args = ModalRoute.of(context)!.settings.arguments as IngredientDetailArgs;
-    context.read<IngredientDetailPageVM>().init(args.ingredient.id!);
+    context.read<IngredientDetailPageVM>().init((args.ingredient.oneOf.value as IngredientListModel).id!);
 
     super.didChangeDependencies();
   }
@@ -55,7 +56,7 @@ class _IngredientDetailPageState extends State<IngredientDetailPage> {
                       NavModel? res = await Navigator.of(context).push(NavConstants.ingredientEditRoute(args));
                       if (res != null && res.refresh) {
                         vm.refreshOnPop = true;
-                        await vm.init(args.ingredient.id!);
+                        await vm.init((args.ingredient.oneOf.value as IngredientListModel).id!);
                       }
                     },
                     icon: const Icon(Icons.edit),
@@ -69,7 +70,7 @@ class _IngredientDetailPageState extends State<IngredientDetailPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 16.0),
                     child: Text(
-                      vm.ingredient?.name ?? args.ingredient.name!,
+                      vm.ingredient?.name ?? (args.ingredient.oneOf.value as IngredientListModel).name!,
                       style: CBTS.bold.primary.s(24),
                     ),
                   ),
@@ -91,9 +92,9 @@ class _IngredientDetailPageState extends State<IngredientDetailPage> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: args.ingredient.imageUrl != null
+                      child: (args.ingredient.oneOf.value as IngredientListModel).imageUrl != null
                           ? Image.network(
-                              args.ingredient.imageUrl!,
+                              (args.ingredient.oneOf.value as IngredientListModel).imageUrl!,
                               fit: BoxFit.cover,
                             )
                           : Image.asset(

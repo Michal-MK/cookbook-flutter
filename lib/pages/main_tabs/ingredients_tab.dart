@@ -1,4 +1,4 @@
-import 'package:cookbook/api/lib/api.dart';
+import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/controls/cb_shimmer.dart';
 import 'package:cookbook/controls/sliver_persistent_header_delegate_impl.dart';
@@ -9,6 +9,7 @@ import 'package:cookbook/themes/colors.dart';
 import 'package:cookbook/themes/theme_provider.dart';
 import 'package:cookbook/viewmodel/ingredients_vm.dart';
 import 'package:flutter/material.dart';
+import 'package:one_of/one_of.dart';
 import 'package:provider/provider.dart';
 
 class IngredientsTab extends StatefulWidget {
@@ -82,10 +83,13 @@ class _IngredientsTabState extends State<IngredientsTab> {
                             onTap: () async {
                               NavModel? model = await Navigator.of(context).push(
                                 NavConstants.ingredientDetailRoute(
-                                  args: IngredientDetailArgs(RecipeDetailIngredientModelIngredient()
-                                    ..id = ingredient.id
-                                    ..name = ingredient.name
-                                    ..imageUrl = ingredient.imageUrl),
+                                  args: IngredientDetailArgs(RecipeDetailIngredientModelAllOfIngredient((b) => b
+                                    ..oneOf = OneOf.fromValue1(
+                                      value: IngredientListModel((b) => b
+                                        ..id = ingredient.id
+                                        ..name = ingredient.name
+                                        ..imageUrl = ingredient.imageUrl),
+                                    ))),
                                 ),
                               );
                               if (model != null && model.refresh) {

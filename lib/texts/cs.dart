@@ -10,7 +10,7 @@ class CsText extends CBTexts {
   String get enum_foodTypeUnknown => "Neznámý";
 
   @override
-  String get enum_foodTypeMainSource => "Hlavní Chod";
+  String get enum_foodTypeMainDish => "Hlavní Chod";
 
   @override
   String get enum_foodTypeSoup => "Polévka";
@@ -38,6 +38,12 @@ class CsText extends CBTexts {
 
   @override
   String get enum_unitSpoons => "lž.";
+
+  @override
+  String get enum_unitTeaSpoons => "čl.";
+
+  @override
+  String get enum_unitCups => "hrnek";
 
   @override
   String get home_ingredientsTab => "Ingredience";

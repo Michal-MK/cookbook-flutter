@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:cookbook/api/lib/api.dart';
+import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/texts/parsers/localization_component.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ abstract class CBTexts extends ChangeNotifier {
   String get drawer_settings;
 
   String get enum_foodTypeUnknown;
-  String get enum_foodTypeMainSource;
+  String get enum_foodTypeMainDish;
   String get enum_foodTypeSoup;
   String get enum_foodTypeDesert;
 
@@ -22,6 +22,8 @@ abstract class CBTexts extends ChangeNotifier {
   String get enum_unitG;
   String get enum_unitPcs;
   String get enum_unitSpoons;
+  String get enum_unitTeaSpoons;
+  String get enum_unitCups;
 
   String get theme_light;
   String get theme_dark;
@@ -63,13 +65,13 @@ abstract class CBTexts extends ChangeNotifier {
 
   String foodTypeToString(FoodType? foodType) {
     switch (foodType) {
-      case FoodType.unknown:
+      case FoodType.number0: // Unknown
         return enum_foodTypeUnknown;
-      case FoodType.mainDish:
-        return enum_foodTypeMainSource;
-      case FoodType.soup:
+      case FoodType.number1: // Main dish
+        return enum_foodTypeMainDish;
+      case FoodType.number2: // Soup
         return enum_foodTypeSoup;
-      case FoodType.dessert:
+      case FoodType.number3: // Desert
         return enum_foodTypeDesert;
     }
     return enum_foodTypeUnknown;
@@ -77,20 +79,24 @@ abstract class CBTexts extends ChangeNotifier {
 
   String unitToString(Unit unit) {
     switch (unit) {
-      case Unit.unknown:
+      case Unit.number0: // Unknown
         return enum_unitUnknown;
-      case Unit.kg:
+      case Unit.number1: // Kg
         return enum_unitKg;
-      case Unit.L:
+      case Unit.number2: // L
         return enum_unitL;
-      case Unit.ml:
+      case Unit.number3: // Ml
         return enum_unitMl;
-      case Unit.G:
+      case Unit.number4: // G
         return enum_unitG;
-      case Unit.pieces:
+      case Unit.number5: // Pcs
         return enum_unitPcs;
-      case Unit.spoons:
+      case Unit.number6: // Spoons
         return enum_unitSpoons;
+      case Unit.number7: // Tea Spoons
+        return enum_unitTeaSpoons;
+      case Unit.number8: // Cups
+        return enum_unitCups;
     }
     return enum_unitUnknown;
   }

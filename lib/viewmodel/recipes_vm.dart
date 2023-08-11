@@ -1,9 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:cookbook/api/lib/api.dart';
 import 'package:cookbook/persistence/sqlite.dart';
 import 'package:cookbook/texts/localization_provider.dart';
 import 'package:cookbook/viewmodel/model/cb_recipe_list_model.dart';
 import 'package:cookbook/viewmodel/model/recipe_detail_model_ext.dart';
+import 'package:cookbook/web_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -22,8 +22,8 @@ class RecipesTabVM extends ChangeNotifier {
       return;
     }
 
-    RecipesApi().getRecipesAll().timeout(const Duration(seconds: 5), onTimeout: () => []).then((value) {
-      remoteRecipes = (value ?? []).map((e) => CBRecipeListModel(instance: e)).toList();
+    COOKBOOK.getRecipesApi().getRecipesAll().then((value) {
+      remoteRecipes = (value.data?.toList() ?? []).map((e) => CBRecipeListModel(instance: e)).toList();
       notifyListeners();
     });
   }
@@ -42,8 +42,8 @@ class RecipesTabVM extends ChangeNotifier {
       return;
     }
 
-    RecipesApi().getRecipesAll().timeout(const Duration(seconds: 5), onTimeout: () => []).then((value) {
-      remoteRecipes = (value ?? []).map((e) => CBRecipeListModel(instance: e)).toList();
+    COOKBOOK.getRecipesApi().getRecipesAll().then((value) {
+      remoteRecipes = (value.data?.toList() ?? []).map((e) => CBRecipeListModel(instance: e)).toList();
       notifyListeners();
     });
   }

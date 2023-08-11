@@ -1,3 +1,4 @@
+import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/fa_icons.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
@@ -229,10 +230,10 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                   ),
                                   child: Row(
                                     children: [
-                                      if (ingredientAmount.ingredient!.imageUrl != null)
+                                      if ((ingredientAmount.ingredient!.oneOf.value as IngredientListModel).imageUrl != null)
                                         ClipRRect(
                                           borderRadius: BorderRadius.circular(8),
-                                          child: Image.network(ingredientAmount.ingredient!.imageUrl!, width: 64, height: 64),
+                                          child: Image.network((ingredientAmount.ingredient!.oneOf.value as IngredientListModel).imageUrl!, width: 64, height: 64),
                                         )
                                       else
                                         Container(
@@ -244,14 +245,14 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                           ),
                                           child: Center(
                                             child: Text(
-                                              ingredientAmount.ingredient!.name![0],
+                                              (ingredientAmount.ingredient!.oneOf.value as IngredientListModel).name![0],
                                               style: CBTS.bold.btn.s(24),
                                             ),
                                           ),
                                         ),
                                       const SizedBox(width: 16),
                                       Text(
-                                        ingredientAmount.ingredient!.name!,
+                                        (ingredientAmount.ingredient!.oneOf.value as IngredientListModel).name!,
                                         style: CBTS.bold.primaryLabel.s(16),
                                       ),
                                       const Spacer(),

@@ -5,7 +5,7 @@
 import 'package:openapi/api.dart';
 ```
 
-All URIs are relative to *http://192.168.88.16:7187*
+All URIs are relative to *https://app-cookbook-maui-api.azurewebsites.net*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -25,13 +25,13 @@ Method | HTTP request | Description
 ```dart
 import 'package:openapi/api.dart';
 
-final api_instance = IngredientsApi();
-final ingredientDetailModel = IngredientDetailModel(); // IngredientDetailModel | 
+final api = Openapi().getIngredientsApi();
+final IngredientDetailModel ingredientDetailModel = ; // IngredientDetailModel | 
 
 try {
-    final result = api_instance.createIngredient(ingredientDetailModel);
-    print(result);
-} catch (e) {
+    final response = api.createIngredient(ingredientDetailModel);
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling IngredientsApi->createIngredient: $e\n');
 }
 ```
@@ -66,12 +66,12 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api_instance = IngredientsApi();
-final id = id_example; // String | 
+final api = Openapi().getIngredientsApi();
+final String id = id_example; // String | 
 
 try {
-    api_instance.deleteIngredient(id);
-} catch (e) {
+    api.deleteIngredient(id);
+} catch on DioError (e) {
     print('Exception when calling IngredientsApi->deleteIngredient: $e\n');
 }
 ```
@@ -106,13 +106,13 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api_instance = IngredientsApi();
-final id = id_example; // String | 
+final api = Openapi().getIngredientsApi();
+final String id = id_example; // String | 
 
 try {
-    final result = api_instance.getIngredientById(id);
-    print(result);
-} catch (e) {
+    final response = api.getIngredientById(id);
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling IngredientsApi->getIngredientById: $e\n');
 }
 ```
@@ -139,7 +139,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getIngredientsAll**
-> List<IngredientListModel> getIngredientsAll()
+> BuiltList<IngredientListModel> getIngredientsAll()
 
 
 
@@ -147,12 +147,12 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api_instance = IngredientsApi();
+final api = Openapi().getIngredientsApi();
 
 try {
-    final result = api_instance.getIngredientsAll();
-    print(result);
-} catch (e) {
+    final response = api.getIngredientsAll();
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling IngredientsApi->getIngredientsAll: $e\n');
 }
 ```
@@ -162,7 +162,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List<IngredientListModel>**](IngredientListModel.md)
+[**BuiltList&lt;IngredientListModel&gt;**](IngredientListModel.md)
 
 ### Authorization
 
@@ -184,13 +184,13 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api_instance = IngredientsApi();
-final ingredientDetailModel = IngredientDetailModel(); // IngredientDetailModel | 
+final api = Openapi().getIngredientsApi();
+final IngredientDetailModel ingredientDetailModel = ; // IngredientDetailModel | 
 
 try {
-    final result = api_instance.updateIngredient(ingredientDetailModel);
-    print(result);
-} catch (e) {
+    final response = api.updateIngredient(ingredientDetailModel);
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling IngredientsApi->updateIngredient: $e\n');
 }
 ```

@@ -1,7 +1,7 @@
-import 'package:cookbook/api/lib/api.dart';
+import 'package:cookbook/api/lib/openapi.dart';
 
 class IngredientDetailArgs {
-  final RecipeDetailIngredientModelIngredient ingredient;
+  final RecipeDetailIngredientModelAllOfIngredient ingredient;
   final bool allowEdit;
 
   IngredientDetailArgs(

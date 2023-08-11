@@ -1,5 +1,6 @@
-import 'package:cookbook/api/lib/api.dart';
+import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/texts/localization_provider.dart';
+import 'package:cookbook/web_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,7 +12,8 @@ class IngredientDetailPageVM extends ChangeNotifier {
   bool refreshOnPop = false;
 
   Future init(String id) async {
-    ingredient = await IngredientsApi().getIngredientById(id);
+    var response = await COOKBOOK.getIngredientsApi().getIngredientById(id: id);
+    ingredient = response.data;
     notifyListeners();
   }
 

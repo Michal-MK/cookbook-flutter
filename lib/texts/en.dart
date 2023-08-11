@@ -10,7 +10,7 @@ class EnText extends CBTexts {
   String get enum_foodTypeUnknown => "Unknown";
 
   @override
-  String get enum_foodTypeMainSource => "Main Course";
+  String get enum_foodTypeMainDish => "Main Course";
 
   @override
   String get enum_foodTypeSoup => "Soup";
@@ -37,7 +37,13 @@ class EnText extends CBTexts {
   String get enum_unitPcs => "pcs.";
 
   @override
-  String get enum_unitSpoons => "tsp.";
+  String get enum_unitSpoons => "sp.";
+
+  @override
+  String get enum_unitTeaSpoons => "tbsp.";
+
+  @override
+  String get enum_unitCups => "cup";
 
   @override
   String get home_ingredientsTab => "Ingredients";

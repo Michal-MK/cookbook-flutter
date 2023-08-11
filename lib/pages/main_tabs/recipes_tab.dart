@@ -1,4 +1,4 @@
-import 'package:cookbook/api/lib/api.dart';
+import 'package:cookbook/api/lib/openapi.dart';
 import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/controls/cb_shimmer.dart';
 import 'package:cookbook/controls/sliver_persistent_header_delegate_impl.dart';
@@ -207,11 +207,11 @@ class _RecipesTabState extends State<RecipesTab> {
 
   String getIcon(FoodType? foodType) {
     switch (foodType) {
-      case FoodType.mainDish:
+      case FoodType.number1: // Main dish
         return FontAwesomeIcons.ConciergeBell;
-      case FoodType.soup:
+      case FoodType.number2: // Soup
         return FontAwesomeIcons.UtensilSpoon;
-      case FoodType.dessert:
+      case FoodType.number3: // Dessert
         return FontAwesomeIcons.IceCream;
       case _:
         return FontAwesomeIcons.Question;
@@ -221,11 +221,11 @@ class _RecipesTabState extends State<RecipesTab> {
 
 Color getFoodColor(FoodType? foodType) {
   switch (foodType) {
-    case FoodType.mainDish:
+    case FoodType.number1: // Main dish
       return CBColors.MainDishFoodTypeColor;
-    case FoodType.soup:
+    case FoodType.number2: // Soup
       return CBColors.SoupFoodTypeColor;
-    case FoodType.dessert:
+    case FoodType.number3: // Dessert
       return CBColors.DessertFoodTypeColor;
     case _:
       return CBColors.UnknownFoodTypeColor;
