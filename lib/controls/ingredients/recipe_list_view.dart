@@ -66,9 +66,9 @@ class RecipeListViewItem extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const SizedBox(width: 16),
+                              const SizedBox(width: 8),
                               Text(recipe.instance.foodType!.getIcon(), style: CBTS.fa.btn.s(16)),
-                              const SizedBox(width: 4),
+                              const SizedBox(width: 8),
                               Text(l.l.enum_foodType.get(recipe.instance.foodType), style: CBTS.regular.btn.s(16)),
                               const SizedBox(width: 16),
                             ],

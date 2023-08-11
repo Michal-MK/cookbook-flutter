@@ -33,11 +33,11 @@ class _RecipesTabState extends State<RecipesTab> {
                   maxHeight: 48,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: CBColors.BackgroundColor,
-                      boxShadow: [
+                      color: CBColors.NavigationBarBackgroundColor,
+                      boxShadow: const [
                         BoxShadow(
-                          color: CBColors.Gray5Color,
-                          offset: const Offset(0, 1),
+                          color: Colors.black,
+                          offset: Offset(0, 1),
                           blurRadius: 1,
                         ),
                       ],
