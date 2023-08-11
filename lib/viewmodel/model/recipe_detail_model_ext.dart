@@ -59,9 +59,9 @@ extension RecipeDetailIngredientModelExt on RecipeDetailIngredientModel {
 
   static RecipeDetailIngredientModel fromMap(Map<String, dynamic> map) {
     return RecipeDetailIngredientModel((b) => b
-      ..id = 'some-id'
-      ..amount = 1.0
-      ..unit = Unit.number0
+      ..id = map['id']
+      ..amount = map['amount']
+      ..unit = Unit.values.firstWhere((element) => element.name == map['unit'] as String?)
       ..ingredient.replace(
         RecipeDetailIngredientModelAllOfIngredient(
           (b) => b
@@ -74,26 +74,7 @@ extension RecipeDetailIngredientModelExt on RecipeDetailIngredientModel {
         ),
       ));
   }
-
-  // return RecipeDetailIngredientModel((b) => {
-  //   b.id = map['ingredient_id'] as String?,
-  //   b.amount = map['amount'] as double?,
-  //   b.unit = Unit.values.firstWhere((element) => element.name == map['unit'] as String?),
-  //   b.ingredient = RecipeDetailIngredientModelAllOfIngredientBuilder()..update((bb) {
-  //     bb.oneOf = IngredientListModelBuilder()..update((bbb) {
-  //       bbb.id = map['ingredient_id'] as String?;
-  //       bbb.name = map['name'] as String?;
-  //       bbb.imageUrl = map['image'] as String?;
-  //     });
-  //   }),
-  // });
 }
-
-// ingredient: RecipeDetailIngredientModelIngredient(
-//         id: map['ingredient_id'] as String?,
-//         name: map['name'] as String?,
-//         imageUrl: map['image'] as String?,
-//       ),
 
 extension IngredientDetailModelExt on IngredientDetailModel {
   Map<String, dynamic> toMap() {

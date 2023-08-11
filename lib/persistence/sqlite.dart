@@ -48,7 +48,7 @@ class SQLite {
       var ingredientAmounts = await txn.query('recipe_ingredients');
       var ret = res.map((m) {
         var recipe = RecipeDetailModelExt.fromMap(m);
-        recipe.rebuild(
+        recipe = recipe.rebuild(
           (b) => b
             ..ingredientAmounts.addAll(
               ingredientAmounts.where((ia) => ia['recipe_id'] == recipe.id).map(

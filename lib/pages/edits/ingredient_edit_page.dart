@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cookbook/api/lib/openapi.dart';
+import 'package:cookbook/const/nav_constants.dart';
 import 'package:cookbook/pages/nav/ingredient_detail_args.dart';
 import 'package:cookbook/styles/text_styles.dart';
 import 'package:cookbook/texts/localization_provider.dart';
@@ -9,6 +10,7 @@ import 'package:cookbook/texts/generic/texts.dart';
 import 'package:cookbook/themes/colors.dart';
 import 'package:cookbook/web_client.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:one_of/one_of.dart';
@@ -161,7 +163,7 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
                                   if (croppedFile != null) {
                                     croppedData = await croppedFile.readAsBytes();
                                     setState(() {
-                                      args.ingredient.rebuild((p0) => p0.oneOf = OneOf.fromValue1(
+                                      args.ingredient = args.ingredient.rebuild((p0) => p0.oneOf = OneOf.fromValue1(
                                           value: IngredientListModel((b) => b
                                             ..id = (args.ingredient.oneOf.value as IngredientListModel).id
                                             ..name = (args.ingredient.oneOf.value as IngredientListModel).name
@@ -248,39 +250,41 @@ class _IngredientEditPageState extends State<IngredientEditPage> {
   }
 
   Future saveIngredient(IngredientDetailModel ingredient, CBTexts l) async {
-    //   FocusScope.of(context).unfocus();
+      FocusScope.of(context).unfocus();
 
-    //   ingredient.rebuild(
-    //     (b) => b
-    //       ..description = descriptionController.text
-    //       ..name = nameController.text,
-    //   );
+      ingredient.rebuild(
+        (b) => b
+          ..description = descriptionController.text
+          ..name = nameController.text,
+      );
 
-    //   if (!formKey.currentState!.validate()) return;
+      if (!formKey.currentState!.validate()) return;
 
-    //   Fluttertoast.showToast(msg: l.ingredientEdit_savingToast);
+      // Fluttertoast.showToast(msg: l.ingredient.ingredientEdit_savingToast);
+      Fluttertoast.showToast(msg: l.global.NIY);
 
-    //   if (args.ingredient.imageUrl != null && !args.ingredient.imageUrl!.startsWith("http")) {
-    //     // Local file
-    //     var imageId = Uuid().v4().toString();
-    //     String? uri = await ImagesApi().createImage(ImageModel(
-    //       id: imageId,
-    //       data: base64.encode(croppedData!),
-    //     ));
+      // if (args.ingredient.imageUrl != null && !args.ingredient.imageUrl!.startsWith("http")) {
+      //   // Local file
+      //   var imageId = Uuid().v4().toString();
+      //   String? uri = await ImagesApi().createImage(ImageModel(
+      //     id: imageId,
+      //     data: base64.encode(croppedData!),
+      //   ));
 
-    //     if (uri != null) {
-    //       uri = uri.replaceAll("\"", "");
-    //       ingredient.imageUrl = uri;
-    //     }
-    //   }
-    //   if (ingredient.id == null) {
-    //     ingredient.id = Uuid().v4().toString();
-    //     await IngredientsApi().createIngredient(ingredient);
-    //   } else if (ingredient.id != null) {
-    //     await IngredientsApi().updateIngredient(ingredient);
-    //   }
-    //   await Fluttertoast.cancel();
-    //   args.ingredient.imageUrl = ingredient.imageUrl;
-    //   Navigator.of(context).pop(NavModel.withRefresh);
+      //   if (uri != null) {
+      //     uri = uri.replaceAll("\"", "");
+      //     ingredient.imageUrl = uri;
+      //   }
+      // }
+      // if (ingredient.id == null) {
+      //   ingredient.id = const Uuid().v4().toString();
+      //   await COOKBOOK.getIngredientsApi().createIngredient(ingredientDetailModel: ingredient);
+      // } else if (ingredient.id != null) {
+      //   await COOKBOOK.getIngredientsApi().updateIngredient(ingredientDetailModel: ingredient);
+      // }
+      // await Fluttertoast.cancel();
+      // args.ingredient.imageUrl = ingredient.imageUrl;
+
+      Navigator.of(context).pop(NavModel.withRefresh);
   }
 }
